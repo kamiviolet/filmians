@@ -1,4 +1,4 @@
-import SummaryFilmCard from "@/components/SummaryFilmCard";
+import DetailedFilmCard from "@/components/DetailedFilmCard";
 
 export default function page() {
   const movie = {
@@ -26,7 +26,7 @@ export default function page() {
 
     return (
         <>
-            <SummaryFilmCard
+            <DetailedFilmCard
                 movie={movie}
             />
         </>
