@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0; 
+    box-sizing: border-box;  
+}
+
+body {
+    display: grid;
+    grid-template-rows: min-content min-content auto 100px;
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+body > * {
+    padding-inline: 1em;
+}

@@ -1,17 +1,14 @@
 import { styled } from "styled-components";
 
-export default function Footer() {
-  const Footer = styled.footer`
-    background-color: #ff0;
-  `;
+const FooterDiv = styled.footer`
+  padding-block: 2.5em;
+  text-align: center;
+`;
 
+export default function Footer() {
   return (
-    <>
-    <Footer>
-      Logo
-      ThemeToggle
-      LinkWrapper: Home && About
-    </Footer>
-    </>
+    <FooterDiv>
+      Designed and created by Kami Lam 2023
+    </FooterDiv>
   );
 }
