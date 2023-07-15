@@ -1,5 +1,6 @@
 "use client";
 
+import { Inter } from 'next/font/google'
 import StyledComponentsRegistry from '../lib/registry';
 import Header from '@/components/Header';
 import Nav from '@/components/Nav';
@@ -8,9 +9,18 @@ import "@/app/globals.css";
 import { styled } from 'styled-components';
 
 const Main = styled.main`
+    width: 100%;
+    max-width: 1440px;
+    justify-self: center;
+    align-self: start;
+    padding-block-start: 2em;
     display: grid;
-    place-items: start center;
 `
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export default function RootLayout({
   children,
@@ -19,15 +29,15 @@ export default function RootLayout({
 }) {
   
   return (
-    <html>
+    <html lang="en" className={inter.className}>
+      <StyledComponentsRegistry>
       <body>
-        <StyledComponentsRegistry>
           <Header />
           <Nav />
           <Main>{children}</Main>
           <Footer />
-        </StyledComponentsRegistry>
       </body>
+      </StyledComponentsRegistry>
     </html>
   )
 }

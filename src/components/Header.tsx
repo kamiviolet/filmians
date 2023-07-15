@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import ThemeToggle from "./ThemeToggle";
 import Link from "next/link";
+import { BiSolidHomeAlt2, BiSolidInfoCircle } from "react-icons/bi";
 
 const HeaderDiv = styled.header`
   display: flex;
@@ -16,18 +17,35 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Links = styled(Link)`
-  margin-inline: 1em;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: 600;
-`;
-
 const Div = styled.div`
-  min-width: 150px;
+  min-width: 100px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+`;
+
+const Links = styled(Link)`
+  text-decoration: none;
+  margin-inline: .5em;
+
+  svg {
+    font-size: 1.25em;
+  }
+  span {
+    display: none;
+  }
+
+  @media (width >= 640px) {
+    svg {
+      display: none;
+    }
+    span {
+      display: inline;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-inline: 1em;
+    }
+  }
 `;
 
 const Logo = styled(Link)`
@@ -42,8 +60,8 @@ export default function Header() {
     <HeaderDiv>
       <HeaderWrapper>
         <Div>
-          <Links href="/" replace>Home</Links>
-          <Links href="/about">About</Links>
+          <Links href="/" replace><span>Home</span><BiSolidHomeAlt2 /></Links>
+          <Links href="/about"><span>About</span><BiSolidInfoCircle /></Links>
         </Div>
         <Div>
           <ThemeToggle />

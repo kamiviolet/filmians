@@ -1,24 +1,28 @@
 "use client";
 
+import { getReleaseYear } from "@/lib/utils";
 import { Movie } from "@/types/types";
 import Image from "next/image";
 import { styled } from "styled-components";
+import { BsStarFill } from "react-icons/bs";
 
 const Card = styled.div`
     display: grid;
     grid-template-columns: min-content auto;
     place-items: center;
     width: 100%;
-    margin: 1em;
     font-size: .95em;
     background-color: #eee;
-    gap: .5em;
-
 
     @media (width >= 640px) {
-        width: fit-content;
+        width: min-content;
+        place-items: start center;
         padding: .5em;
         grid-template-columns: unset;
+
+        & > div {
+            width: 250px;
+        }
     }
 `;
 
@@ -26,31 +30,50 @@ const Poster = styled.div`
     background-color: #ccc;
     width: 150px;
     height: 200px;
-
-    @media (width >= 640px) {
-        width: 100%;
-        height: 275px;
-    }
+    position: relative;
 `;
 
 const DetailsContainer = styled.div`    
+    place-self: start;
     display: grid;
-    width: 100%;
+    padding: 1em;
+
+    @media (width >= 640px) {
+        padding: .5em .25em;
+        min-height: 75px;
+    }
 `;
+
+const Star = styled(BsStarFill)`
+    color: #FFE900;
+    transform: translateY(2px);
+`;
+
 export default function SummaryFilmCard({
-    movie
+    movie, index
 }:{
-    movie: Movie
+    movie: Movie,
+    index: number
 }) {
     return (
         <Card>
             <Poster>
-                <Image src="" width="300" height="400" alt="test" />
+                <Image
+                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    fill
+                    sizes="25%"
+                    alt={movie.title}
+                    style={{objectFit: "cover"}}
+                    quality={75}
+                    priority={index < 10? true: false}
+                />
             </Poster>
             <DetailsContainer>
-                <p>{movie?.title}</p>
-                <p>{movie?.release_date}</p>
-                <p>{movie?.vote_average}</p>
+                <p>
+                    <strong>{movie?.title}</strong>{" "}
+                    ({getReleaseYear(movie?.release_date)})
+                </p>
+                <p><Star />{" "}{movie?.vote_average} / 10</p>
             </DetailsContainer>
         </Card>
     )

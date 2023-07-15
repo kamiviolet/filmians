@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { styled } from "styled-components";
+import SearchBar from "./SearchBar";
+import { useRouter } from "next/navigation";
 
 const NavDiv = styled.nav`
     background-color: #ccc;
@@ -15,7 +17,7 @@ const NavContainer = styled.div`
     display: grid;
     place-items: center;
 
-    @media (width >= 1440px) {
+    @media (width >= 960px) {
         grid-template-columns: auto max-content;
         place-items: center start;
 
@@ -37,32 +39,17 @@ const Div = styled.div`
     }
 `;
 
-const Input = styled.input`
-    font-size: 1em;
-    width: 200px;
-    padding: .5em .5em;
-`;
-
-const Submit = styled(Input)`
-    width: 100px;
-    margin-inline-start: 1.5em;
-    text-transform: capitalize;
-    cursor: pointer;
-`;
-
 export default function Nav() {
+    
     return (
         <NavDiv>
             <NavContainer>
                 <Div>
                     <Link href="/" replace>Latest</Link>
-                    <Link href="/">Top Rated</Link>
-                    <Link href="/">Top Trending</Link>
+                    <Link href="/top-rated">Top Rated</Link>
+                    <Link href="/top-trending">Top Trending</Link>
                 </Div>
-                <Div>
-                    <Input type="text" placeholder="Please enter any keywords"/>
-                    <Submit type="submit" value="search"/>
-                </Div>
+                <SearchBar />
             </NavContainer>
         </NavDiv>
     );
