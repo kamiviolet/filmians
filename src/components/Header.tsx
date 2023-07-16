@@ -55,7 +55,10 @@ const Logo = styled(Link)`
   text-decoration: none;
 `;
 
-export default function Header() {
+export default function Header({theme, themeToggler}: {
+  theme: string,
+  themeToggler: () => void
+}) {
   return (
     <HeaderDiv>
       <HeaderWrapper>
@@ -64,7 +67,7 @@ export default function Header() {
           <Links href="/about"><span>About</span><BiSolidInfoCircle /></Links>
         </Div>
         <Div>
-          <ThemeToggle />
+          <ThemeToggle theme={theme} themeToggler={themeToggler}/>
           <Logo href="/" replace>Filmians</Logo>
         </Div>
       </HeaderWrapper>

@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeContextType } from "@/types/types";
+import { GlobalStyles } from "@/components/GlobalStyle";
 import { useState } from "react";
 import { BsSun, BsSunFill } from "react-icons/bs";
 import { styled } from "styled-components";
@@ -16,16 +16,20 @@ const Button = styled.button`
     }
 `;
 
-export default function ThemeToggle() {
-    const [theme, setTheme] = useState<ThemeContextType>("light");
-
+export default function ThemeToggle({ theme,  themeToggler }: {
+    theme: string,
+    themeToggler: () => void
+}) {
+    
     return (
-        <Button onClick={()=>{theme === "light"? setTheme("dark") : setTheme("light")}}>
+        <>
+        <Button onClick={themeToggler}>
             {
-            theme === "light" 
+            theme === "light"
             ? <BsSun /> 
             : <BsSunFill />
             }
         </Button>
+        </>
     );
 }

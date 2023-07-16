@@ -1,15 +1,15 @@
 "use client";
 
-import { Inter } from 'next/font/google'
-import { useState } from 'react';
-import StyledComponentsRegistry from '../lib/registry';
-import Header from '@/components/Header';
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
-import { SWRConfig } from 'swr';
-import { ThemeContext } from '@/contexts/themeContext';
-import { ThemeContextType } from '@/types/types';
-import { styled } from 'styled-components';
+import { Inter } from "next/font/google"
+import { useState } from "react";
+import StyledComponentsRegistry from "@/lib/registry";
+import Header from "@/components/Header";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import { SWRConfig } from "swr";
+import { styled, ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "@/Theme";
+import { GlobalStyles } from "@/components/GlobalStyle";
 import "@/app/globals.css";
 
 const Main = styled.main`
@@ -22,8 +22,8 @@ const Main = styled.main`
 `
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
+  subsets: ["latin"],
+  display: "swap",
 })
 
 export default function RootLayout({
@@ -31,28 +31,33 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [theme, setTheme] = useState<ThemeContextType>("light");
-  
+  const [theme, setTheme] = useState('light');
+  const themeToggler = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+  }
+  console.log(theme)
+
   return (
     <html lang="en" className={inter.className}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <StyledComponentsRegistry>
       <SWRConfig value={{
-          onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
-            if (error.status === 404) return
-            if (retryCount >= 10) return
-            setTimeout(() => revalidate({ retryCount }), 10000)
-          }
+        onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
+          if (error.status === 404) return
+          if (retryCount >= 10) return
+          setTimeout(() => revalidate({ retryCount }), 10000)
+        }
       }}>
-        <ThemeContext.Provider value={theme}>
-          <StyledComponentsRegistry>
           <body>
-            <Header />
+        <GlobalStyles />
+            <Header themeToggler={themeToggler} theme={theme} />
             <Nav />
             <Main>{children}</Main>
             <Footer />
           </body>
-          </StyledComponentsRegistry>
-        </ThemeContext.Provider>
       </SWRConfig>
+      </StyledComponentsRegistry>
+      </ThemeProvider>
     </html>
   )
 }
