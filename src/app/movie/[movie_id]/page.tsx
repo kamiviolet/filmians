@@ -1,6 +1,6 @@
 import DetailedFilmCard from "@/components/DetailedFilmCard";
 
-export default function page() {
+export default function page({id}: {id: number}) {
   const movie = {
     "poster_path": "/IfB9hy4JH1eH6HEfIgIGORXi5h.jpg",  
     "adult": false,  

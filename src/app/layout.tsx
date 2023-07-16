@@ -1,12 +1,16 @@
 "use client";
 
 import { Inter } from 'next/font/google'
+import { useState } from 'react';
 import StyledComponentsRegistry from '../lib/registry';
 import Header from '@/components/Header';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import "@/app/globals.css";
+import { SWRConfig } from 'swr';
+import { ThemeContext } from '@/contexts/themeContext';
+import { ThemeContextType } from '@/types/types';
 import { styled } from 'styled-components';
+import "@/app/globals.css";
 
 const Main = styled.main`
     width: 100%;
@@ -27,17 +31,28 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const [theme, setTheme] = useState<ThemeContextType>("light");
   
   return (
     <html lang="en" className={inter.className}>
-      <StyledComponentsRegistry>
-      <body>
-          <Header />
-          <Nav />
-          <Main>{children}</Main>
-          <Footer />
-      </body>
-      </StyledComponentsRegistry>
+      <SWRConfig value={{
+          onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
+            if (error.status === 404) return
+            if (retryCount >= 10) return
+            setTimeout(() => revalidate({ retryCount }), 10000)
+          }
+      }}>
+        <ThemeContext.Provider value={theme}>
+          <StyledComponentsRegistry>
+          <body>
+            <Header />
+            <Nav />
+            <Main>{children}</Main>
+            <Footer />
+          </body>
+          </StyledComponentsRegistry>
+        </ThemeContext.Provider>
+      </SWRConfig>
     </html>
   )
 }

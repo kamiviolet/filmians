@@ -3,7 +3,7 @@
 import { styled } from "styled-components";
 import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
 import { useRouter } from "next/navigation";
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent } from "react";
 import Link from "next/link";
 
 const PaginationBar = styled.div`
@@ -32,7 +32,8 @@ const PaginationBar = styled.div`
 const Page = styled(Link)`
     text-decoration: none;
     margin: 1em;
-    &:hover {
+    &:hover,
+    &:focus {
         color: #FFA500;
         font-weight: 800;
     }
@@ -48,32 +49,29 @@ const Button = styled.button`
     }
 `;
 
-const Pagination = ({totalPages, currentPage=1}: {totalPages: number, currentPage: number}) => {
+const Pagination = ({
+    totalPages,
+    currentPage,
+}: {
+    totalPages: number,
+    currentPage: number,
+}) => {
     const pageNumbers = [];
-    const [targetPage, setTargetPage] = useState<number>(1);
     const router = useRouter();
 
-    useEffect(()=>{
-        router.push(`/?page=${targetPage}`)
-    },[targetPage]);
     
     for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(i);
+        pageNumbers.push(i);
     }
+
 
     const handleChangePage = (e: MouseEvent) => {
         e.preventDefault();
         const { target } = e;
         if ((target as HTMLButtonElement).localName == "button") {
             const changeOfPage = +(target as HTMLButtonElement).value;
-            setTargetPage(currentPage+changeOfPage);
+            router.push(`?page=${currentPage+changeOfPage}`)
         }
-    }
-
-    const handlePagination = (e: MouseEvent) => {
-        const { target } = e;
-        const changeOfPage = +(target as HTMLElement).innerText;
-        setTargetPage(changeOfPage);
     }
   
     return (
@@ -90,13 +88,17 @@ const Pagination = ({totalPages, currentPage=1}: {totalPages: number, currentPag
             </div>
             <ul>
             {
-                pageNumbers.map(number => (
-                <li key={number}>
-                <Page data-value={number} onClick={(e)=>handlePagination(e)} href={`?page=${number}`}>
-                    {number}
-                </Page>
-                </li>
-                ))
+                pageNumbers.map((number, i) => {
+                    if (i <= 10) {
+                        return (
+                            <li key={number}>
+                            <Page data-value={number} href={`?page=${number}`}>
+                                {number}
+                            </Page>
+                            </li>
+                        )
+                    }
+                })
             }
             </ul>
         </PaginationBar>

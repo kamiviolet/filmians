@@ -59,12 +59,12 @@ export default function SummaryFilmCard({
         <Card>
             <Poster>
                 <Image
-                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/original${movie.poster_path||movie.backdrop_path}`}
                     fill
-                    sizes="25%"
+                    sizes="10%"
                     alt={movie.title}
                     style={{objectFit: "cover"}}
-                    quality={75}
+                    quality={50}
                     priority={index < 10? true: false}
                 />
             </Poster>

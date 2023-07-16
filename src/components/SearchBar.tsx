@@ -29,7 +29,6 @@ export default function SearchBar() {
         if (searchTerm) {
             router.push(`/search/${searchTerm}`)
         }
-        return;
     }
 
     return (

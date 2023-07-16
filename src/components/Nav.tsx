@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { styled } from "styled-components";
 import SearchBar from "./SearchBar";
-import { useRouter } from "next/navigation";
 
 const NavDiv = styled.nav`
     background-color: #ccc;
@@ -45,9 +44,10 @@ export default function Nav() {
         <NavDiv>
             <NavContainer>
                 <Div>
-                    <Link href="/" replace>Latest</Link>
-                    <Link href="/top-rated">Top Rated</Link>
-                    <Link href="/top-trending">Top Trending</Link>
+                    <Link href="/category/now_playing">Now Playing</Link>
+                    <Link href="/category/top_rated">Top Rated</Link>
+                    <Link href="/category/popular">Popular</Link>
+                    <Link href="/category/upcoming">Upcoming</Link>
                 </Div>
                 <SearchBar />
             </NavContainer>

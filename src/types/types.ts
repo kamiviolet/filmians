@@ -16,6 +16,13 @@ type Robots = {
     host?: string
   }
 
+export type Result = {
+  page: number,
+  results: Movie[],
+  total_pages: number,
+  total_results: number
+}
+
 export type Movie = {  
   poster_path: string,  
   adult: boolean,  
@@ -32,3 +39,5 @@ export type Movie = {
   video: boolean,  
   vote_average: number  
 }
+
+export type ThemeContextType = "light" | "dark";

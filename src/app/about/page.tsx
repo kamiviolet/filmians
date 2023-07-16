@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { styled } from "styled-components"
 
 const Article = styled.article`
@@ -11,19 +12,31 @@ const Article = styled.article`
         margin-block: 1em;
     }
 
-    @media (width >= 1024) {
+    @media (width >= 1024px) {
         padding: 2em;
+        * {
+            font-size: 1.25em
+        }
     }
 `;
+
+const Anchor = styled(Link)`
+    font-size: 1em;
+    text-decoration: none;
+
+    &: hover,
+    &: focus {
+        background-color: #FFA500;
+    }
+`
 
 export default function page() {
     return (
         <Article>
-            <h2>About</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <h2>About</h2>
+        <p>This mock app is built with Next and Styled components.</p>
+        <p>The source of data is from <Anchor href="https://www.themoviedb.org/?language=en-GB">The Movie Database</Anchor> (TMDB), a closed source free (for personal use) database with many amazing features to explore.</p>
         </Article>
     )
 }
+
