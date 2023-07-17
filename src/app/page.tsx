@@ -1,7 +1,7 @@
 import FilmCardWrapper from "@/components/FilmCardWrapper";
 import Title from "@/components/Title";
 
-export default async function page({ searchParams }: {
+export default function Page({ searchParams }: {
   searchParams: { page: string }
 }) {
     const page = +(searchParams?.page);

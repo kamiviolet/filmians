@@ -1,6 +1,6 @@
 import FilmCardWrapper from "@/components/FilmCardWrapper";
 
-export default function page({params, searchParams} : {params: {searchTerm: string}, searchParams: {page: string}}) {
+export default function Page({params, searchParams} : {params: {searchTerm: string}, searchParams: {page: string}}) {
     const page = +(searchParams?.page);
 
     return (

@@ -6,7 +6,7 @@ import { fetcher } from "@/lib/api";
 import { Movie } from "@/types/types";
 import useSWR from "swr";
 
-export default function page({ params }: {params: {movie_id: number}}) {
+export default function Page({ params }: {params: {movie_id: number}}) {
   const movieId = params.movie_id;
   const { data, error, isLoading } = useSWR<Movie, Error>(`https://api.themoviedb.org/3/movie/${movieId}`, fetcher)
   
