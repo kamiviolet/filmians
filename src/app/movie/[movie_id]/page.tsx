@@ -1,21 +1,25 @@
+"use client";
+
 import DetailedFilmCard from "@/components/DetailedFilmCard";
+import BackBtn from "@/components/BackBtn";
+import { fetcher } from "@/lib/api";
+import { Movie } from "@/types/types";
+import useSWR from "swr";
 
-async function getMovie(movieId:number) {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.TMDB_API_KEY}`
-  );
-  return await res.json();
-}
-
-export default async function page({ params }: {params: {id: number}}) {
-  const movieId = params.id;
-  const movie = await getMovie(movieId);
-
-    return (
-        <>
-            <DetailedFilmCard
-                movie={movie}
-            />
-        </>
-    )
+export default function page({ params }: {params: {movie_id: number}}) {
+  const movieId = params.movie_id;
+  const { data, error, isLoading } = useSWR<Movie, Error>(`https://api.themoviedb.org/3/movie/${movieId}`, fetcher)
+  
+  return (
+    <>
+    {
+      data
+      ? <DetailedFilmCard movie={data}/>
+      : isLoading
+      ? <div>Loading...</div>
+      : <div>Error! HQ is not responding to our request.</div>
+    }
+    <BackBtn />
+    </>
+  )
 }

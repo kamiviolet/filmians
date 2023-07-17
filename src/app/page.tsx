@@ -1,4 +1,5 @@
 import FilmCardWrapper from "@/components/FilmCardWrapper";
+import Title from "@/components/Title";
 
 export default async function page({ searchParams }: {
   searchParams: { page: string }
@@ -7,6 +8,7 @@ export default async function page({ searchParams }: {
   
     return (
       <>
+        <Title title="discover" />
         <FilmCardWrapper
           page={page}
           endpoint=""

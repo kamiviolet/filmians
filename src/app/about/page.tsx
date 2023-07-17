@@ -1,5 +1,6 @@
 "use client";
 
+import BackBtn from "@/components/BackBtn";
 import Link from "next/link";
 import { styled } from "styled-components"
 
@@ -28,11 +29,14 @@ const Anchor = styled(Link)`
 
 export default function page() {
     return (
+        <>
         <Article>
-        <h2>About</h2>
-        <p>This mock app is built with Next and Styled components.</p>
-        <p>The source of data is from <Anchor href="https://www.themoviedb.org/?language=en-GB">The Movie Database</Anchor> (TMDB), a closed source free (for personal use) database with many amazing features to explore.</p>
+            <h2>About</h2>
+            <p>This mock app is built with Next and Styled components.</p>
+            <p>The source of data is from <Anchor href="https://www.themoviedb.org/?language=en-GB">The Movie Database</Anchor> (TMDB), a closed source free (for personal use) database with many amazing features to explore.</p>
         </Article>
+        <BackBtn />
+        </>
     )
 }
 

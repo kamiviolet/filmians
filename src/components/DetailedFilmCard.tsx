@@ -47,7 +47,7 @@ const DetailsContainer = styled.div`
         }
     }
 `;
-export default function SummaryFilmCard({
+export default function DetailedFilmCard({
     movie
 }:{
     movie: Movie
@@ -55,7 +55,14 @@ export default function SummaryFilmCard({
     return (
         <Card>
             <Poster>
-                <Image src="" width="300" height="400" alt="test" />
+                <Image
+                    src={`https://image.tmdb.org/t/p/original${movie.poster_path||movie.backdrop_path}`}
+                    width="300"
+                    height="400"
+                    alt={movie.title}
+                    style={{objectFit: "cover"}}
+                    quality={35}
+                />
             </Poster>
             <DetailsContainer>
                 <div>
@@ -64,7 +71,7 @@ export default function SummaryFilmCard({
                 </div>
                 <div>
                     <p>original title</p>
-                    <p>{movie?.original_title}</p>
+                    <em>{movie?.original_title}</em>
                 </div>
                 <div>
                     <p>release date</p>
