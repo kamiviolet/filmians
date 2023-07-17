@@ -30,6 +30,8 @@ const Poster = styled.div`
     background-color: #ccc;
     width: 300px;
     height: 400px;
+    display: grid;
+    place-items: center;
 `;
 
 const DetailsContainer = styled.div`    
