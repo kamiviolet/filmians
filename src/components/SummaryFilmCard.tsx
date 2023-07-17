@@ -38,6 +38,9 @@ const Poster = styled.div`
     width: 150px;
     height: 200px;
     position: relative;
+    display: grid;
+    place-items: center;
+    background-color: #888
 `;
 
 const DetailsContainer = styled.div`    
@@ -56,6 +59,7 @@ const Star = styled(BsStarFill)`
     transform: translateY(2px);
 `;
 
+
 export default function SummaryFilmCard({
     movie, index
 }:{
@@ -66,15 +70,28 @@ export default function SummaryFilmCard({
         <Card className="card">
             <Wrapper href={`/movie/${movie.id}`} replace>
             <Poster>
-                <Image
-                    src={`https://image.tmdb.org/t/p/original${movie.poster_path||movie.backdrop_path}`}
-                    fill
-                    sizes="10%"
-                    alt={movie.title}
-                    style={{objectFit: "cover"}}
-                    quality={35}
-                    priority={index < 10? true: false}
-                />
+            {
+                movie.poster_path||movie.backdrop_path
+                ? <>
+                    <Image
+                        src={`https://image.tmdb.org/t/p/original${movie.poster_path||movie.backdrop_path}`}
+                        fill
+                        sizes="10%"
+                        alt={movie.title}
+                        style={{objectFit: "cover"}}
+                        quality={35}
+                        priority={index < 10? true: false}
+                    />
+                </>
+                :<div>
+                    <Image
+                        src="/default_image.png"
+                        alt={movie.title}
+                        width="100"
+                        height="100"
+                    />
+                </div>
+            }
             </Poster>
             <DetailsContainer>
                 <p>

@@ -60,6 +60,9 @@ export default function DetailedFilmCard({
         return (
             <Card>
                 <Poster>
+                {
+                    data.poster_path||data.backdrop_path
+                    ? <>
                     <Image
                         src={`https://image.tmdb.org/t/p/original${data.poster_path||data.backdrop_path}`}
                         width="300"
@@ -68,6 +71,16 @@ export default function DetailedFilmCard({
                         style={{objectFit: "cover"}}
                         quality={35}
                     />
+                    </>
+                    : <>
+                    <Image
+                        src="/default_image.png"
+                        width="100"
+                        height="100"
+                        alt={data?.title}
+                    />
+                    </>
+                }
                 </Poster>
                 <DetailsContainer>
                     <div>
