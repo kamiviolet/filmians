@@ -3,6 +3,8 @@
 import { Movie } from "@/types/types";
 import Image from "next/image";
 import { styled } from "styled-components";
+import { fetcher } from "@/lib/api";
+import useSWR from "swr";
 
 const Card = styled.div`
     display: grid;
@@ -48,48 +50,52 @@ const DetailsContainer = styled.div`
     }
 `;
 export default function DetailedFilmCard({
-    movie
+    movieId
 }:{
-    movie: Movie
+    movieId: number
 }) {
-    return (
-        <Card>
-            <Poster>
-                <Image
-                    src={`https://image.tmdb.org/t/p/original${movie.poster_path||movie.backdrop_path}`}
-                    width="300"
-                    height="400"
-                    alt={movie.title}
-                    style={{objectFit: "cover"}}
-                    quality={35}
-                />
-            </Poster>
-            <DetailsContainer>
-                <div>
-                    <p>title</p>
-                    <p>{movie?.title}</p>
-                </div>
-                <div>
-                    <p>original title</p>
-                    <em>{movie?.original_title}</em>
-                </div>
-                <div>
-                    <p>release date</p>
-                    <p>{movie?.release_date}</p>
-                </div>
-                <div>
-                    <p>vote average</p>
-                    <p>{movie?.vote_average}</p>
-                </div>
-                <div>
-                    <p>overview</p>
-                    <p>{movie?.overview}</p>
-                </div>
-                <div>
-                    <p>original language</p>
-                    <p>{movie?.original_language}</p>
-                </div>
-            </DetailsContainer>
-        </Card>
-    )
+    const { data, error, isLoading } = useSWR<Movie, Error>(`https://api.themoviedb.org/3/movie/${movieId}`, fetcher)
+
+    if (data) {
+        return (
+            <Card>
+                <Poster>
+                    <Image
+                        src={`https://image.tmdb.org/t/p/original${data.poster_path||data.backdrop_path}`}
+                        width="300"
+                        height="400"
+                        alt={data?.title}
+                        style={{objectFit: "cover"}}
+                        quality={35}
+                    />
+                </Poster>
+                <DetailsContainer>
+                    <div>
+                        <p>title</p>
+                        <p>{data?.title}</p>
+                    </div>
+                    <div>
+                        <p>original title</p>
+                        <em>{data?.original_title}</em>
+                    </div>
+                    <div>
+                        <p>release date</p>
+                        <p>{data?.release_date}</p>
+                    </div>
+                    <div>
+                        <p>vote average</p>
+                        <p>{data?.vote_average}</p>
+                    </div>
+                    <div>
+                        <p>overview</p>
+                        <p>{data?.overview}</p>
+                    </div>
+                    <div>
+                        <p>original language</p>
+                        <p>{data?.original_language}</p>
+                    </div>
+                </DetailsContainer>
+            </Card>
+        )
+    }
 }

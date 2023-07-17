@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { styled } from "styled-components";
 import SearchBar from "./SearchBar";
@@ -29,12 +31,18 @@ const NavContainer = styled.div`
 const Div = styled.div`
     min-width: 150px;
     margin-block: .5em;
-    & > a {
-        margin-inline-end: 1em;
+     a {
+        margin-inline-end: .5em;
         text-decoration: none;
+
         &:last-of-type {
             margin-inline-end: unset;
         }
+    }
+
+    span::after {
+        content: " | ";
+        padding-inline: .5em;
     }
 `;
 
@@ -44,9 +52,9 @@ export default function Nav() {
         <NavDiv>
             <NavContainer>
                 <Div>
-                    <Link href="/category/now_playing">Now Playing</Link>
-                    <Link href="/category/top_rated">Top Rated</Link>
-                    <Link href="/category/popular">Popular</Link>
+                    <Link href="/category/now_playing">Now Playing</Link><span></span>
+                    <Link href="/category/top_rated">Top Rated</Link><span></span>
+                    <Link href="/category/popular">Popular</Link><span></span>
                     <Link href="/category/upcoming">Upcoming</Link>
                 </Div>
                 <SearchBar />

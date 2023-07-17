@@ -1,7 +1,12 @@
-import { styled } from "styled-components";
+"use client";
+
 import ThemeToggle from "./ThemeToggle";
 import Link from "next/link";
 import { BiSolidHomeAlt2, BiSolidInfoCircle } from "react-icons/bi";
+import { useState } from "react";
+import { styled, ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "@/Theme";
+import { GlobalStyles } from "./GlobalStyle";
 
 const HeaderDiv = styled.header`
   display: flex;
@@ -54,22 +59,27 @@ const Logo = styled(Link)`
   text-decoration: none;
 `;
 
-export default function Header({theme, themeToggler}: {
-  theme: string,
-  themeToggler: () => void
-}) {
+export default function Header() {
+  const [theme, setTheme] = useState('light');
+  const themeToggler = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+  }
+
   return (
-    <HeaderDiv>
-      <HeaderWrapper>
-        <Div>
-          <Links href="/" replace><span>Home</span><BiSolidHomeAlt2 /></Links>
-          <Links href="/about"><span>About</span><BiSolidInfoCircle /></Links>
-        </Div>
-        <Div>
-          <ThemeToggle theme={theme} themeToggler={themeToggler}/>
-          <Logo href="/" replace>Filmians</Logo>
-        </Div>
-      </HeaderWrapper>
-    </HeaderDiv>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <HeaderDiv>
+        <HeaderWrapper>
+          <Div>
+            <Links href="/" replace><span>Home</span><BiSolidHomeAlt2 /></Links>
+            <Links href="/about"><span>About</span><BiSolidInfoCircle /></Links>
+          </Div>
+          <Div>
+            <ThemeToggle theme={theme} themeToggler={themeToggler}/>
+            <Logo href="/" replace>Filmians</Logo>
+          </Div>
+        </HeaderWrapper>
+      </HeaderDiv>
+    </ThemeProvider>
   );
 }
