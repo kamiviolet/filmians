@@ -3,9 +3,9 @@ import { styled } from "styled-components";
 import SearchBar from "./SearchBar";
 
 const NavDiv = styled.nav`
-    background-color: #ccc;
     display: flex;
     justify-content: center;
+    font-weight: 600;
 `;
 
 const NavContainer = styled.div`

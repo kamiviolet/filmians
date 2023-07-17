@@ -7,6 +7,7 @@ import { styled } from "styled-components";
 const Card = styled.div`
     display: grid;
     place-items: start center;
+    place-self: center;
 
     & > div {
         margin: 1.5em .5em;
@@ -14,7 +15,7 @@ const Card = styled.div`
     
     @media (width >= 1024px) {
         grid-template-columns: 300px auto;
-        max-width: 960px;
+        max-width: 900px;
         width: 100%; 
 
         & > div {
@@ -30,6 +31,7 @@ const Poster = styled.div`
 `;
 
 const DetailsContainer = styled.div`    
+    padding-block: 1em;
     div {
         display: grid;
         margin-block-end: 1em;

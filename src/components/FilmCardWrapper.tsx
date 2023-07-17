@@ -13,8 +13,9 @@ const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     padding-block-start: 2em;
+    padding-inline: .25em;
     gap: 1em;
-    justify-content: center;
+    justify-content: space-evenly;
 `;
 
 export default function FilmCardWrapper({

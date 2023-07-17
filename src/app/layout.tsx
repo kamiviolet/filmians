@@ -19,6 +19,10 @@ const Main = styled.main`
     align-self: start;
     padding-block-start: 2em;
     display: grid;
+
+    a {
+      font-weight: 600;
+    }
 `
 
 const inter = Inter({
@@ -35,7 +39,6 @@ export default function RootLayout({
   const themeToggler = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
   }
-  console.log(theme)
 
   return (
     <html lang="en" className={inter.className}>

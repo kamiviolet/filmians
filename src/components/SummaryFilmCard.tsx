@@ -5,14 +5,23 @@ import { Movie } from "@/types/types";
 import Image from "next/image";
 import { styled } from "styled-components";
 import { BsStarFill } from "react-icons/bs";
+import Link from "next/link";
 
 const Card = styled.div`
+    width: 100%;
+    font-size: .95em;
+
+    @media (width >= 640px) {
+        width: min-content;
+    }
+`;
+
+const Wrapper = styled(Link)`
+    width: inherit;
     display: grid;
     grid-template-columns: min-content auto;
     place-items: center;
-    width: 100%;
-    font-size: .95em;
-    background-color: #eee;
+    text-decoration: none;
 
     @media (width >= 640px) {
         width: min-content;
@@ -27,7 +36,6 @@ const Card = styled.div`
 `;
 
 const Poster = styled.div`
-    background-color: #ccc;
     width: 150px;
     height: 200px;
     position: relative;
@@ -56,7 +64,8 @@ export default function SummaryFilmCard({
     index: number
 }) {
     return (
-        <Card>
+        <Card className="card">
+            <Wrapper href={`/movie/${movie.id}`} replace>
             <Poster>
                 <Image
                     src={`https://image.tmdb.org/t/p/original${movie.poster_path||movie.backdrop_path}`}
@@ -64,7 +73,7 @@ export default function SummaryFilmCard({
                     sizes="10%"
                     alt={movie.title}
                     style={{objectFit: "cover"}}
-                    quality={50}
+                    quality={35}
                     priority={index < 10? true: false}
                 />
             </Poster>
@@ -75,6 +84,7 @@ export default function SummaryFilmCard({
                 </p>
                 <p><Star />{" "}{movie?.vote_average} / 10</p>
             </DetailsContainer>
+            </Wrapper>
         </Card>
     )
 }

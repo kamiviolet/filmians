@@ -48,11 +48,10 @@ const EmblaSlideImg = styled(Image)`
   object-fit: cover;
 `
 const Description = styled.div`
-  background-color: #eee;
   width: 100%;
   height: 20%;
-  padding: .5em;
-  opacity: .8;
+  padding: .5em 1em;
+  opacity: .75;
   position: absolute;
   bottom: 0;
   overflow: auto;
@@ -64,7 +63,7 @@ const Description = styled.div`
   }
 
   @media (width >= 768px) {
-    width: 35%;
+    width: 40%;
     height: 100%;
     right: 0;
 
@@ -105,7 +104,7 @@ export const EmblaCarousel = ({
     }, [emblaMainApi, onSelect])
 
     return (
-    <Embla>
+    <Embla className="carousel">
       <div className="embla__viewport" ref={emblaMainRef}>
         <div className="embla__container">
           {
@@ -119,11 +118,11 @@ export const EmblaCarousel = ({
                 src={`https://image.tmdb.org/t/p/original${movie.poster_path||movie.backdrop_path}`}
                 alt={`${movie.title} (${getReleaseYear(movie.release_date)})`}
                 fill
-                sizes="20%"
-                quality={50}
+                sizes="30%"
+                quality={65}
                 style={{objectFit: "cover"}}
                 />
-                <Description>
+                <Description className="caurosel_description">
                   <h4>{`${movie.title} (${getReleaseYear(movie.release_date)})`}</h4>
                   <p>{movie.overview}</p>
                 </Description>

@@ -6,7 +6,6 @@ import { BiSolidHomeAlt2, BiSolidInfoCircle } from "react-icons/bi";
 const HeaderDiv = styled.header`
   display: flex;
   justify-content: center;
-  background-color: #eee
 `;
 
 const HeaderWrapper = styled.div`

@@ -11,6 +11,7 @@ const Button = styled.button`
     background-color: transparent;
     margin-inline: .25em;
     transform: translateY(2px);
+
     * {
         pointer-events: none
     }

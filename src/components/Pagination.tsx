@@ -1,7 +1,7 @@
 "use client";
 
 import { styled } from "styled-components";
-import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
+import { FcPrevious, FcNext } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
 import Link from "next/link";
@@ -10,13 +10,13 @@ const PaginationBar = styled.div`
     margin-block: 5em 3em;
     display: flex;
     justify-content: center;
+    align-items: center;
+
     ul {
         display: none;
     }
+
     @media (width >= 640px) {
-        div {
-            display: none;
-        }
         ul {
             display: block;
             list-style-type: none;
@@ -31,7 +31,7 @@ const PaginationBar = styled.div`
 
 const Page = styled(Link)`
     text-decoration: none;
-    margin: 1em;
+    margin-inline: 1em;
     &:hover,
     &:focus {
         color: #FFA500;
@@ -40,13 +40,9 @@ const Page = styled(Link)`
 `
 const Button = styled.button`
     font-size: 1.75em;
-    cursor: pointer;
-    background-color: transparent;
-    padding: 1em;
+    padding-inline: .5em;
+    transform: translateY(4px);
     z-index: 2;
-    * {
-        pointer-events: none
-    }
 `;
 
 const Pagination = ({
@@ -76,16 +72,7 @@ const Pagination = ({
   
     return (
         <PaginationBar>
-            <div>
-                {
-                currentPage === 1? <></> 
-                : <Button onClick={(e)=>handleChangePage(e)} value={-1}><GrCaretPrevious /></Button>
-                }
-                {
-                currentPage === totalPages? <></> 
-                : <Button onClick={(e)=>handleChangePage(e)} value={1}><GrCaretNext /></Button>
-                }
-            </div>
+            <Button disabled={currentPage === 1} onClick={(e)=>handleChangePage(e)} value={-1}><FcPrevious /></Button>
             <ul>
             {
                 pageNumbers.map((number, i) => {
@@ -101,6 +88,10 @@ const Pagination = ({
                 })
             }
             </ul>
+            {
+                currentPage === totalPages? <></> 
+                : <Button onClick={(e)=>handleChangePage(e)} value={1}><FcNext /></Button>
+            }
         </PaginationBar>
     );
   };

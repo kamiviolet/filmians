@@ -23,11 +23,7 @@ const Article = styled.article`
 const Anchor = styled(Link)`
     font-size: 1em;
     text-decoration: none;
-
-    &: hover,
-    &: focus {
-        background-color: #FFA500;
-    }
+    color: #F9A603;
 `
 
 export default function page() {
