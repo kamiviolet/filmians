@@ -21,7 +21,6 @@ export default function ThemeToggle({ theme,  themeToggler }: {
     theme: string,
     themeToggler: () => void
 }) {
-    
     return (
         <>
         <Button onClick={themeToggler}>

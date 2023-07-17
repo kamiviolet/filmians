@@ -17,7 +17,7 @@ const Card = styled.div`
 `;
 
 const Wrapper = styled(Link)`
-    width: inherit;
+    min-width: inherit;
     display: grid;
     grid-template-columns: min-content auto;
     place-items: center;
@@ -26,11 +26,10 @@ const Wrapper = styled(Link)`
     @media (width >= 640px) {
         width: min-content;
         place-items: start center;
-        padding: .5em;
         grid-template-columns: unset;
 
         & > div {
-            width: 250px;
+            min-width: 200px;
         }
     }
 `;
@@ -47,7 +46,7 @@ const DetailsContainer = styled.div`
     padding: 1em;
 
     @media (width >= 640px) {
-        padding: .5em .25em;
+        padding: .5em;
         min-height: 75px;
     }
 `;

@@ -12,12 +12,20 @@ body {
     line-height: 1.5;
 }
 
-body > * {
-    padding-inline: 1em;
+h2 {
+    font-size: 2.25em;
 }
 
-h2 {
-    font-size: 2.75em;
-    padding-inline: .25em;
-    margin-block-end: 1em;
+main {
+    width: 100%;
+    max-width: 1440px;
+    justify-self: center;
+    align-self: start;
+    padding-block-start: 2em;
+    padding-inline: 1em;
+    display: grid;
+}
+
+a, button {
+    font-weight: 500;
 }
